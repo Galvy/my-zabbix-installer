@@ -27,7 +27,7 @@ if [ -x /usr/bin/yum ]; then
                 /usr/bin/yum -y install zabbix-agent
                 /usr/bin/systemctl enable zabbix-agent
                 /usr/bin/curl -o /etc/zabbix/zabbix_agentd.conf https://raw.githubusercontent.com/Galvy/my-zabbix-installer/master/zabbix_agentd.conf
-                /usr/bin/systemctl start zabbix-agent
+                /usr/bin/systemctl restart zabbix-agent
         fi
         if [ "$CENTOS_VER" -eq "8" ]; then
                 #echo $CENTOS_VER;
@@ -36,7 +36,7 @@ if [ -x /usr/bin/yum ]; then
                 /usr/bin/yum -y install zabbix-agent
                 /usr/bin/systemctl enable zabbix-agent
                 /usr/bin/curl -o /etc/zabbix/zabbix_agentd.conf https://raw.githubusercontent.com/Galvy/my-zabbix-installer/master/zabbix_agentd.conf
-                /usr/bin/systemctl start zabbix-agent
+                /usr/bin/systemctl restart zabbix-agent
         fi
 
 fi
