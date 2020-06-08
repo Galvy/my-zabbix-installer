@@ -7,13 +7,16 @@ fi
 
 # Only run it if we can (ie. on Ubuntu/Debian)
 if [ -x /usr/bin/apt-get ]; then
-  apt-get update
-  apt-get -y install zabbix-agent sysv-rc-conf
-  sysv-rc-conf zabbix-agent on
-  sed -i 's/Server=127.0.0.1/Server=52.90.49.206/' /etc/zabbix/zabbix_agentd.conf
-  sed -i 's/ServerActive=127.0.0.1/ServerActive=52.90.49.206/' /etc/zabbix/zabbix_agentd.conf
-  HOSTNAME=`hostname` && sed -i "s/Hostname=Zabbix\ server/Hostname=$HOSTNAME/" /etc/zabbix/zabbix_agentd.conf
-  service zabbix-agent restart
+    if [ $(cat /etc/debian_version) == '8.*' ]; then
+             echo "DEB_8X"
+    fi
+#  apt-get update
+#  apt-get -y install zabbix-agent sysv-rc-conf
+#  sysv-rc-conf zabbix-agent on
+#  sed -i 's/Server=127.0.0.1/Server=52.90.49.206/' /etc/zabbix/zabbix_agentd.conf
+#  sed -i 's/ServerActive=127.0.0.1/ServerActive=52.90.49.206/' /etc/zabbix/zabbix_agentd.conf
+#  HOSTNAME=`hostname` && sed -i "s/Hostname=Zabbix\ server/Hostname=$HOSTNAME/" /etc/zabbix/zabbix_agentd.conf
+#  service zabbix-agent restart
 fi
 
 # Only run it if we can (ie. on RHEL/CentOS)
