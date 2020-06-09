@@ -7,8 +7,15 @@ fi
 
 # Only run it if we can (ie. on Ubuntu/Debian)
 if [ -x /usr/bin/apt-get ]; then
-    if [ $(cat /etc/debian_version) == '8.*' ]; then
-             echo "DEB_8X"
+      DEBIAN_VER=$(sed 's/\..*//' /etc/debian_version)
+    if [ "$DEBIAN_VER" -eq  "8" ]; then
+#             echo  $DEBIAN_VER
+        /usr/bin/wget https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-1+jessie_all.deb
+        /usr/bin/dpkg -i zabbix-release_5.0-1+jessie_all.deb
+        /usr/bin/apt update
+        /usr/bin/apt install zabbix-agent
+        /usr/bin/curl -o /etc/zabbix/zabbix_agentd.conf https://raw.githubusercontent.com/Galvy/my-zabbix-installer/master/zabbix_agentd.conf
+        /bin/systemctl restart zabbix-agent
     fi
 #  apt-get update
 #  apt-get -y install zabbix-agent sysv-rc-conf
